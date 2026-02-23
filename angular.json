@@ -1,0 +1,140 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "shell": {
+            "projectType": "application",
+            "schematics": {},
+            "root": "projects/shell",
+            "sourceRoot": "projects/shell/src",
+            "prefix": "app",
+            "i18n": {
+                "sourceLocale": "en-US",
+                "locales": {
+                    "fr": "projects/shell/src/locale/messages.fr.xlf",
+                    "de": "projects/shell/src/locale/messages.de.xlf"
+                }
+            },
+            "architect": {
+                "build": {
+                    "builder": "@angular-architects/native-federation:build",
+                    "options": {
+                        "localize": true
+                    },
+                    "configurations": {
+                        "production": {
+                            "target": "shell:esbuild:production"
+                        },
+                        "development": {
+                            "target": "shell:esbuild:development",
+                            "dev": true
+                        },
+                        "fr": {
+                            "target": "shell:esbuild:development,fr",
+                            "dev": true
+                        },
+                        "de": {
+                            "target": "shell:esbuild:development,de",
+                            "dev": true
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve": {
+                    "builder": "@angular-architects/native-federation:build",
+                    "options": {
+                        "target": "shell:serve-original:development",
+                        "rebuildDelay": 0,
+                        "dev": true,
+                        "port": 0
+                    },
+                    "configurations": {
+                        "fr": {
+                            "target": "shell:serve-original:fr"
+                        },
+                        "de": {
+                            "target": "shell:serve-original:de"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular/build:extract-i18n",
+                    "options": {
+                        "buildTarget": "shell:esbuild",
+                        "outFile": "projects/shell/src/locale/messages.xlf",
+                        "format": "xlf"
+                    }
+                },
+                "esbuild": {
+                    "builder": "@angular/build:application",
+                    "options": {
+                        "verbose": true,
+                        "outputPath": "dist/shell",
+                        "index": "projects/shell/src/index.html",
+                        "browser": "projects/shell/src/main.ts",
+                        "polyfills": [
+                            "@angular/localize/init",
+                            "es-module-shims"
+                        ],
+                        "tsConfig": "projects/shell/tsconfig.app.json",
+                        "styles": [
+                            "projects/shell/src/styles.css"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "500kB",
+                                    "maximumError": "1MB"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "4kB",
+                                    "maximumError": "8kB"
+                                }
+                            ],
+                            "outputHashing": "all"
+                        },
+                        "development": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "sourceMap": true
+                        },
+                        "fr": {
+                            "localize": ["fr"]
+                        },
+                        "de": {
+                            "localize": ["de"]
+                        }
+                    },
+                    "defaultConfiguration": "production"
+                },
+                "serve-original": {
+                    "builder": "@angular/build:dev-server",
+                    "configurations": {
+                        "production": {
+                            "buildTarget": "shell:esbuild:production"
+                        },
+                        "development": {
+                            "buildTarget": "shell:esbuild:development"
+                        },
+                        "fr": {
+                            "buildTarget": "shell:esbuild:development,fr"
+                        },
+                        "de": {
+                            "buildTarget": "shell:esbuild:development,de"
+                        }
+                    },
+                    "defaultConfiguration": "development",
+                    "options": {
+                        "port": 4200
+                    }
+                }
+            }
+        }
+    }
+}
