@@ -1,9 +1,6 @@
-const {
-  withNativeFederation,
-  shareAll,
-} = require("@angular-architects/native-federation/config");
+import { withNativeFederation, shareAll } from '@angular-architects/native-federation-v4/config';
 
-module.exports = withNativeFederation({
+export default withNativeFederation({
   name: "shell",
 
   exposes: {
