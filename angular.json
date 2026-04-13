@@ -18,7 +18,7 @@
             },
             "architect": {
                 "build": {
-                    "builder": "@angular-architects/native-federation:build",
+                    "builder": "@angular-architects/native-federation-v4:build",
                     "options": {
                         "localize": true
                     },
@@ -42,7 +42,7 @@
                     "defaultConfiguration": "production"
                 },
                 "serve": {
-                    "builder": "@angular-architects/native-federation:build",
+                    "builder": "@angular-architects/native-federation-v4:build",
                     "options": {
                         "target": "shell:serve-original:development",
                         "rebuildDelay": 0,
