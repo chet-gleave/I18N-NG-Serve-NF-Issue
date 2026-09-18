@@ -1,7 +1,7 @@
 # I18N-NG-Serve-NF-Issue
 
-This repository's purpose is to demonstrate an issue with serving localized builds with @angular-architects/native-federation.
-The issue occurs appears after moving from @angular/build version 20.3.6 => 20.3.7.
+This repository's purpose was to demonstrate an issue with serving localized builds with @angular-architects/native-federation.
+
 
 
 ## Commands
@@ -20,8 +20,8 @@ npm run start:shell:de
 
 ## Compatibility Table
 
-| Command              | @angular/build 20.3.6 | @angular/build 20.3.7 |
+| Command              | @angular/build 20.3.37 | @angular/build 21.2.24 |
 |----------------------|-----------------------|-----------------------|
 | `npm run start:shell` | ✅                 | ✅                 |
-| `npm run start:shell:fr` | ✅              | ❌                 |
-| `npm run start:shell:de` | ✅              | ❌                 |
+| `npm run start:shell:fr` | ✅              | ✅                 |
+| `npm run start:shell:de` | ✅              | ✅                 |
