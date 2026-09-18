@@ -1,6 +1,6 @@
-import { initFederation } from "@softarc/native-federation-runtime";
+import { initFederation } from '@angular-architects/native-federation-v4';
 
-initFederation()
+initFederation({})
   .catch((err) => console.error(err))
   .then((_) => import("./bootstrap"))
   .catch((err) => console.error(err));
